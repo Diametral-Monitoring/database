@@ -10,7 +10,7 @@ CREATE TABLE country (
     alias VARCHAR(2) NOT NULL,
 
     UNIQUE INDEX (name),
-    INDEX (alias)
+    UNIQUE INDEX (alias)
 );
 INSERT INTO country(name, alias) VALUES ('Switzerland', 'ch');
 INSERT INTO country(name, alias) VALUES ('USA', 'us');
@@ -23,7 +23,7 @@ CREATE TABLE language (
     alias VARCHAR(2) NOT NULL,
 
     UNIQUE INDEX (name),
-    INDEX (alias)
+    UNIQUE INDEX (alias)
 );
 INSERT INTO language(name, alias) VALUES ('German', 'de');
 INSERT INTO language(name, alias) VALUES ('English', 'en');
@@ -32,9 +32,13 @@ DROP TABLE IF EXISTS subject_type;
 CREATE TABLE subject_type (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
+    alias VARCHAR(100) NOT NULL,
 
-    UNIQUE INDEX (name)
+    UNIQUE INDEX (name),
+    UNIQUE INDEX (alias)
 );
+INSERT INTO subject_type(name, alias) VALUES ('Person', 'person');
+INSERT INTO subject_type(name, alias) VALUES ('News Magazine', 'news');
 
 DROP TABLE IF EXISTS subject;
 CREATE TABLE subject (
@@ -42,11 +46,9 @@ CREATE TABLE subject (
     name VARCHAR(255) NOT NULL,
     type_id INT UNSIGNED NOT NULL,
     country_id INT UNSIGNED NOT NULL,
-    external_id VARCHAR(255),
 
     INDEX (type_id),
-    INDEX (country_id),
-    INDEX (external_id)
+    INDEX (country_id)
 );
 
 DROP TABLE IF EXISTS post;
@@ -62,7 +64,7 @@ CREATE TABLE post (
     INDEX (subject_id),
     INDEX (url),
     INDEX (timestamp),
-    INDEX (external_id)
+    UNIQUE INDEX (external_id)
 );
 
 DROP TABLE IF EXISTS score_type;
