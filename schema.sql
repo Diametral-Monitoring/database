@@ -42,9 +42,11 @@ CREATE TABLE subject (
     name VARCHAR(255) NOT NULL,
     type_id INT UNSIGNED NOT NULL,
     country_id INT UNSIGNED NOT NULL,
+    external_id VARCHAR(255),
 
     INDEX (type_id),
-    INDEX (country_id)
+    INDEX (country_id),
+    INDEX (external_id)
 );
 
 DROP TABLE IF EXISTS post;
