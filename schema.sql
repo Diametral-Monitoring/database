@@ -7,17 +7,26 @@ DROP TABLE IF EXISTS country;
 CREATE TABLE country (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
+    alias VARCHAR(2) NOT NULL,
 
-    UNIQUE INDEX (name)
+    UNIQUE INDEX (name),
+    INDEX (alias)
 );
+INSERT INTO country(name, alias) VALUES ('Switzerland', 'ch');
+INSERT INTO country(name, alias) VALUES ('USA', 'us');
+INSERT INTO country(name, alias) VALUES ('Germany', 'de');
 
 DROP TABLE IF EXISTS language;
 CREATE TABLE language (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
+    alias VARCHAR(2) NOT NULL,
 
-    UNIQUE INDEX (name)
+    UNIQUE INDEX (name),
+    INDEX (alias)
 );
+INSERT INTO country(name, alias) VALUES ('German', 'de');
+INSERT INTO country(name, alias) VALUES ('English', 'en');
 
 DROP TABLE IF EXISTS subject_type;
 CREATE TABLE subject_type (
