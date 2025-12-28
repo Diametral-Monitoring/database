@@ -25,8 +25,8 @@ CREATE TABLE language (
     UNIQUE INDEX (name),
     INDEX (alias)
 );
-INSERT INTO country(name, alias) VALUES ('German', 'de');
-INSERT INTO country(name, alias) VALUES ('English', 'en');
+INSERT INTO language(name, alias) VALUES ('German', 'de');
+INSERT INTO language(name, alias) VALUES ('English', 'en');
 
 DROP TABLE IF EXISTS subject_type;
 CREATE TABLE subject_type (
