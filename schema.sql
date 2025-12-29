@@ -70,8 +70,18 @@ CREATE TABLE post (
 DROP TABLE IF EXISTS score_type;
 CREATE TABLE score_type (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL,
+    alias VARCHAR(100) NOT NULL,
+
+    UNIQUE INDEX (name),
+    UNIQUE INDEX (alias)
 );
+INSERT INTO score_type(name, alias) VALUES ('Perspective Severe Toxicity', 'perspective_severe_toxicity');
+INSERT INTO score_type(name, alias) VALUES ('Perspective Toxicity', 'perspective_toxicity');
+INSERT INTO score_type(name, alias) VALUES ('Perspective Profanity', 'perspective_profanity');
+INSERT INTO score_type(name, alias) VALUES ('Perspective Identity Attack', 'perspective_identity_attack');
+INSERT INTO score_type(name, alias) VALUES ('Perspective Insult', 'perspective_insult');
+INSERT INTO score_type(name, alias) VALUES ('Perspective Threat', 'perspective_threat');
 
 DROP TABLE IF EXISTS score;
 CREATE TABLE score (
