@@ -92,3 +92,31 @@ CREATE TABLE score (
 
     UNIQUE INDEX (post_id, type_id)
 );
+
+
+
+---- VIEWS ----
+CREATE OR REPLACE VIEW v_monthly_rolling_score AS
+WITH monthly AS (
+  SELECT
+    CAST(DATE_FORMAT(p.timestamp, '%Y-%m-01 00:00:00') AS DATETIME) AS time,
+    p.subject_id,
+    s.type_id,
+    AVG(s.score) AS month_avg
+  FROM post p
+  JOIN score s ON s.post_id = p.id
+  GROUP BY
+    CAST(DATE_FORMAT(p.timestamp, '%Y-%m-01 00:00:00') AS DATETIME),
+    p.subject_id,
+    s.type_id
+)
+SELECT
+  time,
+  subject_id,
+  type_id,
+  AVG(month_avg) OVER (
+    PARTITION BY subject_id, type_id
+    ORDER BY time
+    ROWS BETWEEN 11 PRECEDING AND CURRENT ROW
+  ) AS value
+FROM monthly;
