@@ -33,9 +33,11 @@ CREATE TABLE subject_type (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     alias VARCHAR(100) NOT NULL,
+    active TINYINT(1) NOT NULL DEFAULT 1,
 
     UNIQUE INDEX (name),
-    UNIQUE INDEX (alias)
+    UNIQUE INDEX (alias),
+    INDEX (active)
 );
 INSERT INTO subject_type(name, alias) VALUES ('Person', 'person');
 INSERT INTO subject_type(name, alias) VALUES ('News Magazine', 'news');
