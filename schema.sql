@@ -53,6 +53,19 @@ CREATE TABLE subject (
     INDEX (country_id)
 );
 
+DROP TABLE IF EXISTS subject_twitter_config;
+CREATE TABLE subject_twitter_config (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
+    subject_id INT UNSIGNED NOT NULL,
+    account_key VARCHAR(255) NOT NULL,
+    active TINYINT(1) NOT NULL DEFAULT 1,
+
+    INDEX (subject_id),
+    INDEX (active),
+    INDEX (account_key)
+);
+
 DROP TABLE IF EXISTS post;
 CREATE TABLE post (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
