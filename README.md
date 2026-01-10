@@ -36,3 +36,16 @@ WHERE
   AND post.timestamp <  '2026-01-01 00:00:00'
 ;
 ```
+
+All reported subjects:
+```sql
+SELECT
+  subject.name
+ ,subject_twitter_config.account_key
+FROM
+  subject
+  LEFT JOIN subject_twitter_config ON subject_twitter_config.subject_id = subject.id
+WHERE
+  subject.active = 1
+;
+```
